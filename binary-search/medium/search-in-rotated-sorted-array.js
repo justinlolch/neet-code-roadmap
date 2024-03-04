@@ -6,7 +6,6 @@
 var search = function (nums, target) {
     let leftPt = 0;
     let rightPt = nums.length - 1;
-    let index = -1;
 
     while (leftPt <= rightPt) {
         const middlePt = (leftPt + rightPt) >> 1;
@@ -23,45 +22,22 @@ var search = function (nums, target) {
         if (rightValue === target)
             return rightPt;
 
-        if (target < middleValue) {
-            if (middleValue > leftValue) {
-                // left to middle pointer is sorted
-                if (target > leftValue) {
-                    // target is between left and middle pointer
-                    leftPt += 1;
-                    rightPt = middlePt - 1;
-                } else {
-                    // target is between middle and right pointer
-                    leftPt = middlePt + 1;
-                    rightPt -= 1;
-                }
+        if (middleValue > leftValue) {
+            if (leftValue < target && target < middleValue) {
+                leftPt += 1;
+                rightPt = middlePt - 1;
             } else {
-                // right pointer is sorted
-                if (target < rightValue) {
-                    // target is between left and middle pointer
-                    leftPt += 1;
-                    rightPt = middlePt - 1;
-                } else return -1;
+                leftPt = middlePt + 1;
+                rightPt -= 1;
             }
         } else {
-            if (rightValue > middleValue) {
-                // middle to right pointer sorted
-                if (target < rightValue) {
-                    // target is between middle and right pointer
-                    leftPt = middlePt + 1;
-                    rightPt -= 1;
-                } else {
-                    // target is between left and middle pointer
-                    leftPt += 1;
-                    rightPt = middlePt - 1;
-                }
-            } else {
-                // left to middle pointer is sorted
-                if (target > leftValue) {
-                    // target is between middle and right pointer
-                    rightPt -= 1;
-                    leftPt = middlePt + 1;
-                } else return -1;
+            if (middleValue < target && rightValue > target) {
+                rightPt -= 1;
+                leftPt = middlePt + 1;
+            }
+            else {
+                leftPt += 1;
+                rightPt = middlePt - 1;
             }
         }
     }

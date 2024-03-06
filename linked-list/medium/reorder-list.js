@@ -17,7 +17,8 @@ function ListNode(val, next) {
  */
 var reorderList = function(head) {
     const middle = getMid(head);
-    const reversedSecondPortion = reverseList(middle);
+    const reversedSecondPortion = reverseList(middle.next);
+    middle.next = null;
 
     reorder(head, reversedSecondPortion);
 };
@@ -25,7 +26,7 @@ var reorderList = function(head) {
 const reorder = (head, secondPort) => {
     let [first, temp, second] = [head, null, secondPort];
 
-    while (second.next) {
+    while (second) {
         temp = first.next;
         first.next = second;
         first = temp;
@@ -64,7 +65,7 @@ const getMid = (head) => {
 
 
 const test = () => {
-    const head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, null))))
+    const head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5, null)))))
     reorderList(head);
     console.log(JSON.stringify(head))
 }

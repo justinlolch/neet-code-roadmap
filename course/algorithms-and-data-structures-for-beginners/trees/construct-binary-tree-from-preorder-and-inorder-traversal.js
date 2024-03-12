@@ -10,58 +10,16 @@ function TreeNode(val, left, right) {
  * @return {TreeNode}
  */
 var buildTree = function (preorder, inorder) {
-    let root;
-    let current = new TreeNode();
-    let btRoot;
+    if (!preorder.length || !inorder.length)
+        return null;
 
-    const set = new Set();
-    let rightFlag = false;
+    const root = new TreeNode(preorder[0]);
 
-    for (const val of preorder) {
-        if (!current.val && !rightFlag) {
-            current.val = val;
-            set.add(val);
-            root = current;
-            if (!btRoot)
-                btRoot = root;
-            if (val === inorder[0]) {
-                // next preorder val = root.right
-                let rootVal = inorder.shift();
-                while (set.has(rootVal)) {
-                    rootVal = inorder.shift();
-                }
-                inorder.unshift(rootVal);
-                set.clear();
-                rightFlag = true;
-            }
-            continue;
-        }
+    const rootIndexInInorder = inorder.findIndex(val => val === preorder[0]);
+    root.left = buildTree(preorder.slice(1, rootIndexInInorder+1), inorder.slice(0, rootIndexInInorder));
+    root.right = buildTree(preorder.slice(rootIndexInInorder+1), inorder.slice(rootIndexInInorder+1));
 
-        if (rightFlag) {
-            current = new TreeNode(val);
-            root.right = current;
-            root = root.right;
-            set.add(val);
-            rightFlag = false;
-            continue;
-        }
-
-        current.left = new TreeNode(val);
-        current = current.left;
-        set.add(val);
-        if (val === inorder[0]) {
-            // next preorder val = root.right
-            let rootVal = inorder.shift();
-            while (set.has(rootVal)) {
-                rootVal = inorder.shift();
-            }
-            inorder.unshift(rootVal);
-            set.clear();
-            rightFlag = true;
-        }
-
-    }
-    return btRoot;
+    return root;
 };
 
 buildTree([3,9,20,15,7], [9,3,15,20,7])

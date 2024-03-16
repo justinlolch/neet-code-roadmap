@@ -1,22 +1,38 @@
 class KthLargest {
+    /**
+     * @param {number} k
+     * @param {number[]} nums
+     * @constructor
+     */
     constructor(k, nums) {
-        this.heap = [0, ...nums];
-        this.k = k;
+        this.k = k
+        this.minHeap = new MinPriorityQueue();
+
+        nums.forEach((num) => this.add(num))
     }
 
-    add(val) {
-        let currentLength = this.heap.length;
-        const isOdd = currentLength % 2 !== 0;
-        if (!isOdd){
-            // check + 1; parent
+    /**
+     * @param {number} val
+     * @return {number}
+     */
+    add(val, { minHeap } = this) {
+        const isUnderCapacity = minHeap.size() < this.k;
+        if (isUnderCapacity) {
+            minHeap.enqueue(val);
+
+            return this.top();
         }
+
+        const isLarger = this.top() < val;
+        if (isLarger) {
+            minHeap.dequeue()
+            minHeap.enqueue(val);
+        }
+
+        return this.top();
+    }
+
+    top ({ minHeap } = this) {
+        return minHeap.front()?.element || 0
     }
 }
-
-/**
- * Your KthLargest object will be instantiated and called as such:
- * var obj = new KthLargest(k, nums)
- * var param_1 = obj.add(val)
- */
-
-const obj = new KthLargest(3, [1,2,3,4])

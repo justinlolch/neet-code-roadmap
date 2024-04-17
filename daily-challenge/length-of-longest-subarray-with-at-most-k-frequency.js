@@ -31,4 +31,4 @@ console.log(maxSubarrayLength([1, 2, 3, 1, 2, 3, 1, 2], 2)) // 6
 console.log(maxSubarrayLength([1, 2, 1, 2, 1, 2, 1, 2], 1)) // 2
 console.log(maxSubarrayLength([5, 5, 5, 5, 5, 5, 5], 4)) // 4
 
-// 2/4/2024
+// 28/3/2024

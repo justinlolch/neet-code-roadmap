@@ -4,28 +4,14 @@
  * @return {string}
  */
 var reversePrefix = function (word, ch) {
-    const resultArr = [];
-    let targetIndex;
-    let [leftPt, rightPt] = [0, 0];
-
     for (let i = 0; i < word.length; i++) {
-        if (targetIndex === undefined && word[i] === ch) targetIndex = i;
-        resultArr.push(word[i]);
+        if (word[i] === ch) {
+            const reversed = word.substring(0, i + 1).split('').reverse().join("");
+            const remaining = word.substring(i + 1, word.length);
+            return reversed + remaining;
+        }
     }
-
-    if (targetIndex === undefined)
-        return word;
-
-    rightPt = targetIndex;
-    while (leftPt < rightPt) {
-        const temp = resultArr[leftPt];
-        resultArr[leftPt] = resultArr[rightPt];
-        resultArr[rightPt] = temp;
-        leftPt++;
-        rightPt--;
-    }
-
-    return resultArr.join("");
+    return word;
 };
 
 console.log(reversePrefix("abcdefd", ch = "d")) // "dcbaefd"

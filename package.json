@@ -1,0 +1,16 @@
+{
+  "name": "neet-code-roadmap",
+  "version": "1.0.0",
+  "description": "My learning path in leetcode and neetcodeIO",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justinlolch/neet-code-roadmap.git"
+  },
+  "author": "justinlolch",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/justinlolch/neet-code-roadmap/issues"
+  },
+  "homepage": "https://github.com/justinlolch/neet-code-roadmap#readme"
+}

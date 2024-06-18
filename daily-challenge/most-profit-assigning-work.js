@@ -1,3 +1,8 @@
+const {
+    MinPriorityQueue,
+    MaxPriorityQueue
+} = require('@datastructures-js/priority-queue');
+
 /**
  * @param {number[]} difficulty
  * @param {number[]} profit
@@ -8,8 +13,8 @@ var maxProfitAssignment = function (difficulty, profit, worker) {
     worker.sort((a, b) => a - b);
 
     let maxProfit = 0;
-    const maxProfitQueue = new MaxPriorityQueue({priority: elem => elem.pro});
-    const minDifficultyQueue = new MinPriorityQueue({priority: elem => elem.diff});
+    const maxProfitQueue = new MaxPriorityQueue(elem => elem.pro);
+    const minDifficultyQueue = new MinPriorityQueue(elem => elem.diff);
 
     for (let i = 0; i < profit.length; i++) {
         const elem = {pro: profit[i], diff: difficulty[i]};
@@ -17,11 +22,11 @@ var maxProfitAssignment = function (difficulty, profit, worker) {
     }
 
     for (const workDiff of worker) {
-        while (!minDifficultyQueue.isEmpty() && minDifficultyQueue.front().element.diff <= workDiff) {
-            maxProfitQueue.enqueue(minDifficultyQueue.dequeue().element);
+        while (!minDifficultyQueue.isEmpty() && minDifficultyQueue.front().diff <= workDiff) {
+            maxProfitQueue.enqueue(minDifficultyQueue.dequeue());
         }
-        if (!maxProfitQueue.isEmpty()){
-            maxProfit += maxProfitQueue.front().element.pro;
+        if (!maxProfitQueue.isEmpty()) {
+            maxProfit += maxProfitQueue.front().pro;
         }
     }
 

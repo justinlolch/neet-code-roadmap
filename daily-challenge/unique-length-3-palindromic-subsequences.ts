@@ -7,9 +7,9 @@ function countPalindromicSubsequence(s: string): number {
         occurrenceHashMap.set(s[i], (occurrenceHashMap.get(s[i]) ?? 0) + 1)
 
     for (const char of s) {
-        occurrenceHashMap.set(char, occurrenceHashMap.get(char) - 1);
+        occurrenceHashMap.set(char, occurrenceHashMap.get(char)! - 1);
         for (const left of set.values()) {
-            if (occurrenceHashMap.get(left) > 0)
+            if (occurrenceHashMap.get(left)! > 0)
                 ans.add(`${char}-${left}`)
         }
         set.add(char);

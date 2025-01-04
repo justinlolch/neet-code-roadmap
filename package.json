@@ -15,5 +15,8 @@
   "homepage": "https://github.com/justinlolch/neet-code-roadmap#readme",
   "dependencies": {
     "@datastructures-js/priority-queue": "5.4.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
   }
 }

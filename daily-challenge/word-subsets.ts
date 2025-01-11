@@ -54,4 +54,4 @@ class Counter {
 console.log(wordSubsets(["amazon", "apple", "facebook", "google", "leetcode"], ["e", "o"])) // ["facebook","google","leetcode"]
 console.log(wordSubsets(["amazon", "apple", "facebook", "google", "leetcode"], ["l", "e"])) // ["apple","google","leetcode"]
 
-// 10P/1/2025
+// 10/1/2025
